@@ -12,7 +12,7 @@ bash <(curl --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/on
 For windows:
 
 ```powershell
-pwsh -Command "& { iwr -useb https://raw.githubusercontent.com/onyx-hq/onyx-public-releases/refs/heads/main/install_onyx.ps1 | iex }"
+powershell -Command "& { iwr -useb https://raw.githubusercontent.com/onyx-hq/onyx-public-releases/refs/heads/main/install_onyx.ps1 | iex }"
 ```
 
 Or download the latest binary releases from and copy them to a place where your PATH can reach. (i.e. /usr/local/bin)

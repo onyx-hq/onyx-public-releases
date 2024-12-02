@@ -24,7 +24,7 @@ switch ($arch) {
 }
 
 # Get the latest release tag from GitHub API
-$repo = "onyx-hq/onyx"
+$repo = "onyx-hq/onyx-public-releases"
 $latestTagUrl = "https://api.github.com/repos/$repo/releases/latest"
 $latestTagResponse = Invoke-RestMethod -Uri $latestTagUrl -Headers @{ "User-Agent" = "PowerShell" }
 $latestTag = $latestTagResponse.tag_name
