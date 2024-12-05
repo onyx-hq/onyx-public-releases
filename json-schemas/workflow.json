@@ -2,7 +2,10 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "Workflow",
   "type": "object",
-  "required": ["name", "steps"],
+  "required": [
+    "name",
+    "steps"
+  ],
   "properties": {
     "name": {
       "type": "string"
@@ -15,12 +18,29 @@
     }
   },
   "definitions": {
+    "LoopValues": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      ]
+    },
     "Step": {
       "type": "object",
       "oneOf": [
         {
           "type": "object",
-          "required": ["agent_ref", "prompt", "type"],
+          "required": [
+            "agent_ref",
+            "prompt",
+            "type"
+          ],
           "properties": {
             "agent_ref": {
               "type": "string"
@@ -36,24 +56,35 @@
             },
             "type": {
               "type": "string",
-              "enum": ["agent"]
+              "enum": [
+                "agent"
+              ]
             }
           }
         },
         {
           "type": "object",
-          "required": ["sql_file", "type", "warehouse"],
+          "required": [
+            "sql_file",
+            "type",
+            "warehouse"
+          ],
           "properties": {
             "sql_file": {
               "type": "string"
             },
             "type": {
               "type": "string",
-              "enum": ["execute_sql"]
+              "enum": [
+                "execute_sql"
+              ]
             },
             "variables": {
               "default": null,
-              "type": ["object", "null"],
+              "type": [
+                "object",
+                "null"
+              ],
               "additionalProperties": {
                 "type": "string"
               }
@@ -65,7 +96,11 @@
         },
         {
           "type": "object",
-          "required": ["steps", "type", "values"],
+          "required": [
+            "steps",
+            "type",
+            "values"
+          ],
           "properties": {
             "steps": {
               "type": "array",
@@ -75,41 +110,51 @@
             },
             "type": {
               "type": "string",
-              "enum": ["loop_sequential"]
+              "enum": [
+                "loop_sequential"
+              ]
             },
             "values": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              }
+              "$ref": "#/definitions/LoopValues"
             }
           }
         },
         {
           "type": "object",
-          "required": ["template", "type"],
+          "required": [
+            "template",
+            "type"
+          ],
           "properties": {
             "template": {
               "type": "string"
             },
             "type": {
               "type": "string",
-              "enum": ["formatter"]
+              "enum": [
+                "formatter"
+              ]
             }
           }
         },
         {
           "type": "object",
-          "required": ["type"],
+          "required": [
+            "type"
+          ],
           "properties": {
             "type": {
               "type": "string",
-              "enum": ["Unknown"]
+              "enum": [
+                "Unknown"
+              ]
             }
           }
         }
       ],
-      "required": ["name"],
+      "required": [
+        "name"
+      ],
       "properties": {
         "name": {
           "type": "string"
