@@ -9,6 +9,12 @@ For linux and macOS:
 bash <(curl --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/onyx-hq/onyx-public-releases/refs/heads/main/install_onyx.sh)
 ```
 
+To install a certain version of onyx (not the latest version):
+
+```bash
+ONYX_VERSION="0.1.24" bash <(curl --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/onyx-hq/onyx-public-releases/refs/heads/main/install_onyx.sh)
+```
+
 For windows:
 
 ```powershell
