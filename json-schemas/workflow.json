@@ -4,16 +4,16 @@
   "type": "object",
   "required": [
     "name",
-    "steps"
+    "tasks"
   ],
   "properties": {
     "name": {
       "type": "string"
     },
-    "steps": {
+    "tasks": {
       "type": "array",
       "items": {
-        "$ref": "#/definitions/Step"
+        "$ref": "#/definitions/Task"
       }
     },
     "tests": {
@@ -21,6 +21,15 @@
       "type": "array",
       "items": {
         "$ref": "#/definitions/Eval"
+      }
+    },
+    "variables": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "additionalProperties": {
+        "type": "string"
       }
     }
   },
@@ -30,7 +39,7 @@
         {
           "type": "object",
           "required": [
-            "eval_type"
+            "type"
           ],
           "properties": {
             "concurrency": {
@@ -38,12 +47,6 @@
               "type": "integer",
               "format": "uint",
               "minimum": 0.0
-            },
-            "eval_type": {
-              "type": "string",
-              "enum": [
-                "consistency"
-              ]
             },
             "model_ref": {
               "type": [
@@ -83,6 +86,12 @@
                 "string",
                 "null"
               ]
+            },
+            "type": {
+              "type": "string",
+              "enum": [
+                "consistency"
+              ]
             }
           }
         }
@@ -111,7 +120,7 @@
         }
       ]
     },
-    "Step": {
+    "Task": {
       "type": "object",
       "oneOf": [
         {
@@ -128,7 +137,7 @@
             "export": {
               "anyOf": [
                 {
-                  "$ref": "#/definitions/StepExport"
+                  "$ref": "#/definitions/TaskExport"
                 },
                 {
                   "type": "null"
@@ -179,14 +188,17 @@
             }
           ],
           "required": [
-            "type",
-            "warehouse"
+            "database",
+            "type"
           ],
           "properties": {
+            "database": {
+              "type": "string"
+            },
             "export": {
               "anyOf": [
                 {
-                  "$ref": "#/definitions/StepExport"
+                  "$ref": "#/definitions/TaskExport"
                 },
                 {
                   "type": "null"
@@ -208,16 +220,13 @@
               "additionalProperties": {
                 "type": "string"
               }
-            },
-            "warehouse": {
-              "type": "string"
             }
           }
         },
         {
           "type": "object",
           "required": [
-            "steps",
+            "tasks",
             "type",
             "values"
           ],
@@ -228,10 +237,10 @@
               "format": "uint",
               "minimum": 0.0
             },
-            "steps": {
+            "tasks": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/Step"
+                "$ref": "#/definitions/Task"
               }
             },
             "type": {
@@ -255,7 +264,7 @@
             "export": {
               "anyOf": [
                 {
-                  "$ref": "#/definitions/StepExport"
+                  "$ref": "#/definitions/TaskExport"
                 },
                 {
                   "type": "null"
@@ -270,6 +279,43 @@
               "enum": [
                 "formatter"
               ]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": [
+            "src",
+            "type"
+          ],
+          "properties": {
+            "export": {
+              "anyOf": [
+                {
+                  "$ref": "#/definitions/TaskExport"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "src": {
+              "type": "string"
+            },
+            "type": {
+              "type": "string",
+              "enum": [
+                "workflow"
+              ]
+            },
+            "variables": {
+              "type": [
+                "object",
+                "null"
+              ],
+              "additionalProperties": {
+                "type": "string"
+              }
             }
           }
         },
@@ -295,7 +341,7 @@
         "cache": {
           "anyOf": [
             {
-              "$ref": "#/definitions/StepCache"
+              "$ref": "#/definitions/TaskCache"
             },
             {
               "type": "null"
@@ -307,7 +353,7 @@
         }
       }
     },
-    "StepCache": {
+    "TaskCache": {
       "type": "object",
       "required": [
         "path"
@@ -322,7 +368,7 @@
         }
       }
     },
-    "StepExport": {
+    "TaskExport": {
       "type": "object",
       "required": [
         "format",

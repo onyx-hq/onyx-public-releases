@@ -171,7 +171,7 @@
         {
           "type": "object",
           "required": [
-            "eval_type"
+            "type"
           ],
           "properties": {
             "concurrency": {
@@ -179,12 +179,6 @@
               "type": "integer",
               "format": "uint",
               "minimum": 0.0
-            },
-            "eval_type": {
-              "type": "string",
-              "enum": [
-                "consistency"
-              ]
             },
             "model_ref": {
               "type": [
@@ -224,6 +218,12 @@
                 "string",
                 "null"
               ]
+            },
+            "type": {
+              "type": "string",
+              "enum": [
+                "consistency"
+              ]
             }
           }
         }
@@ -241,11 +241,14 @@
         {
           "type": "object",
           "required": [
+            "database",
             "name",
-            "type",
-            "warehouse"
+            "type"
           ],
           "properties": {
+            "database": {
+              "type": "string"
+            },
             "description": {
               "default": "Execute the SQL query. If the query is invalid, fix it and run again.",
               "type": "string"
@@ -258,20 +261,20 @@
               "enum": [
                 "execute_sql"
               ]
-            },
-            "warehouse": {
-              "type": "string"
             }
           }
         },
         {
           "type": "object",
           "required": [
+            "database",
             "name",
-            "type",
-            "warehouse"
+            "type"
           ],
           "properties": {
+            "database": {
+              "type": "string"
+            },
             "description": {
               "default": "Validate the SQL query. If the query is invalid, fix it and run again.",
               "type": "string"
@@ -284,9 +287,6 @@
               "enum": [
                 "validate_sql"
               ]
-            },
-            "warehouse": {
-              "type": "string"
             }
           }
         },
